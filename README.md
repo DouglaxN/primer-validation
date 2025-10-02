@@ -102,9 +102,4 @@ MIT License © 2025
 
 ## 👨‍💻 Autor
 
-Douglas Silva
-
-```
-
----
-```
+Douglas Nunes
