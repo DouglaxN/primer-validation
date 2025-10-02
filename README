@@ -1,0 +1,112 @@
+Perfeito! Vou criar uma versão **mais atraente e visual** do README para GitHub, incluindo sugestão de imagem do gráfico (você pode gerar e salvar como `primers_plot.png`) e destaques para facilitar a leitura. Aqui está o Markdown pronto:
+
+````markdown
+# 🧬 Localização de Primers em Sequências de DNA
+
+Este repositório contém um **script em R** para identificar **onde seus primers se ligam em uma sequência de DNA de referência** e gerar um **gráfico intuitivo** mostrando posição, direção e qualidade do alinhamento.  
+
+Isso é útil para validar primers antes de **PCR, qPCR ou sequenciamento dirigido**.
+
+---
+
+## ⚙️ Pré-requisitos
+
+Pacotes necessários no R:
+
+- **[Biostrings](https://bioconductor.org/packages/Biostrings/)** – manipulação de sequências de DNA  
+- **[ggplot2](https://ggplot2.tidyverse.org/)** – visualização de gráficos  
+- **[ggforce](https://ggforce.data-imaginist.com/)** – setas e elementos gráficos avançados  
+
+Instalação:
+
+```r
+if(!requireNamespace("BiocManager", quietly = TRUE)) install.packages("BiocManager")
+BiocManager::install("Biostrings")
+install.packages(c("ggplot2", "ggforce"))
+````
+
+---
+
+## 📁 Estrutura dos arquivos
+
+| Arquivo              | Descrição                                                |
+| -------------------- | -------------------------------------------------------- |
+| `seq_ref.fasta`    | Sequência de referência (genoma ou gene alvo)            |
+| `seq_primers.fasta`      | Lista de primers (forward e reverse) em formato FASTA    |
+| `primers-validation.R` | Script principal para localizar primers e gerar gráficos |
+
+---
+
+## 🧬 Como usar
+
+### 1. Carregar arquivos FASTA
+
+```r
+ref_fasta <- "seq_ref.fasta"
+primers_fasta <- "seq_primers.fasta"
+
+ref_seq <- readDNAStringSet(ref_fasta)[[1]]
+primers <- readDNAStringSet(primers_fasta)
+```
+
+### 2. Rodar a validação de primers
+
+```r
+validation <- find_primers(ref_seq, primers)
+print(validation)
+```
+
+* Resultado (`validation`) inclui:
+
+  * `Primer`: nome do primer
+  * `Start` e `End`: posição na sequência de referência
+  * `Strand`: fita direta (`+`) ou reversa (`-`)
+  * `Score`: pontuação do alinhamento (quanto maior, melhor)
+
+### 3. Gerar gráfico da posição dos primers
+
+```r
+plot_primers(validation)  # ou execute o bloco de plot do script
+```
+
+> Exemplo de saída visual:
+
+![Exemplo de gráfico de primers](primers_plot.png)
+
+* **Barras azuis (+)** → primers na fita direta
+* **Barras vermelhas (-)** → primers na fita reversa
+* **Setas** → direção de extensão do primer
+* **Score** dentro da barra → indica qualidade do alinhamento
+
+---
+
+## 📊 Interpretação do gráfico
+
+* Primers próximos ou sobrepostos podem indicar regiões com **possíveis produtos de PCR indesejados**
+* Pontuações baixas (`Score`) podem indicar que o primer **não se liga eficientemente**
+* Útil para planejar **PCR, qPCR ou CRISPR**, garantindo especificidade
+
+---
+
+## 💡 Dicas
+
+* Use primers únicos para evitar ligações não específicas
+* Ajuste o design do primer se houver **sobreposição ou baixa pontuação**
+* Para múltiplas sequências de referência, adapte o script para iterar sobre elas
+
+---
+
+## 📄 Licença
+
+MIT License © 2025
+
+---
+
+## 👨‍💻 Autor
+
+Douglas Silva
+
+```
+
+---
+```
