@@ -1,14 +1,14 @@
-````markdown
+
 # 🧬 Localização de Primers em Sequências de DNA
 
 Este repositório contém um **script em R** para identificar **onde seus primers se ligam em uma sequência de DNA de referência** e gerar um **gráfico intuitivo** mostrando posição, direção e qualidade do alinhamento.  
 
 Isso é útil para validar primers antes de **PCR, qPCR ou sequenciamento dirigido**.
 
----
+
 
 ## ⚙️ Pré-requisitos
-
+````markdown
 Pacotes necessários no R:
 
 - **[Biostrings](https://bioconductor.org/packages/Biostrings/)** – manipulação de sequências de DNA  
